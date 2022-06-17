@@ -1,0 +1,84 @@
+{
+  "$id": "simpleLogin",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "message",
+    "status",
+    "user"
+  ],
+  "properties": {
+    "message": {
+      "title": "Success message",
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 200
+    },
+    "status": {
+      "title": "Status message",
+      "type": "string",
+      "minLength": 4,
+      "maxLength": 20
+    },
+    "user": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "_id",
+        "name",
+        "surname",
+        "email",
+        "role",
+        "image",
+        "username",
+        "__v"
+      ],
+      "properties": {
+        "_id":{
+          "type": "string",
+          "minLength": 24,
+          "maxLength": 24,
+          "pattern": "[a-z0-9]"
+        },
+        "username": {
+          "type": "string",
+          "minLength": 4,
+          "maxLength": 100
+        },
+        "name": {
+          "type": "string",
+          "minLength": 4,
+          "maxLength": 100
+        },
+        "surname": {
+          "type": "string",
+          "minLength": 4,
+          "maxLength": 100
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "minLength": 4,
+          "maxLength": 100
+        },
+        "role": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 20
+        },
+        "image": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 20,
+          "pattern": "^.*(.png|.jpg|.jpeg)$"
+        },
+        "__v": {
+          "type": "integer",
+          "minLength": 1,
+          "maxLength": 1
+        }
+      }
+    }
+  }
+}
