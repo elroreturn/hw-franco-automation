@@ -1,5 +1,5 @@
 {
-  "$id": "simpleLogin",
+  "$id": "editUser",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "additionalProperties": false,
@@ -68,10 +68,7 @@
           "maxLength": 20
         },
         "image": {
-          "type": "string",
-          "minLength": 8,
-          "maxLength": 50,
-          "pattern": "^.*(.png|.jpg|.jpeg)$"
+          "type": ["null", "string"]
         },
         "__v": {
           "type": "integer",

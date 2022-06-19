@@ -1,20 +1,13 @@
 {
-  "$id": "simpleLogin",
+  "$id": "userInformation",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "additionalProperties": false,
   "required": [
-    "message",
     "status",
     "user"
   ],
   "properties": {
-    "message": {
-      "title": "Success message",
-      "type": "string",
-      "minLength": 20,
-      "maxLength": 200
-    },
     "status": {
       "title": "Status message",
       "type": "string",
@@ -70,7 +63,7 @@
         "image": {
           "type": "string",
           "minLength": 8,
-          "maxLength": 50,
+          "maxLength": 20,
           "pattern": "^.*(.png|.jpg|.jpeg)$"
         },
         "__v": {

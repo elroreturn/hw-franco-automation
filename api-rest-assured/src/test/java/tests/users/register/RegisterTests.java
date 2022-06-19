@@ -1,4 +1,4 @@
-package tests.login;
+package tests.users.register;
 
 import baseTests.BaseTest;
 import io.restassured.http.ContentType;
@@ -8,24 +8,26 @@ import io.restassured.specification.RequestSpecification;
 import models.User;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
-import utils.fileLoader.users.UsersCsv;
-import utils.fileLoader.users.UsersLoader;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
-import static org.testng.Assert.assertEquals;
+import static utils.FakeUser.createFakeUser;
+import static utils.deserializer.UserDeserializer.userDeserializer;
 
-public class LoginTests extends BaseTest {
+public class RegisterTests extends BaseTest {
 
     @Test
-    public void simpleSuccessfulLoginTest() {
+    public void registerTest() {
 
         // Arrange
-        UsersCsv testUser = new UsersLoader().getUserByUserType(this.testUsers, "defaultUser");
+        User fakeUser = createFakeUser();
 
         JSONObject parameters = new JSONObject();
-        parameters.put("email", testUser.getEmail());
-        parameters.put("password", testUser.getPassword());
+        parameters.put("name", fakeUser.getName());
+        parameters.put("surname", fakeUser.getSurname());
+        parameters.put("username", fakeUser.getUsername());
+        parameters.put("email", fakeUser.getEmail());
+        parameters.put("password", "password");
 
         RequestSpecification request = given()
                 .contentType(ContentType.JSON)
@@ -34,20 +36,19 @@ public class LoginTests extends BaseTest {
 
         // Act
         Response response = request.when()
-                .post(System.getProperty("SERVER_URL") + "/api/login")
+                .post(System.getProperty("SERVER_URL") + "/api/register")
                 .prettyPeek();
 
         // Assert
-        assertEquals(response.statusCode(), 200);
-
         response.then()
                 .assertThat()
-                .body(matchesJsonSchemaInClasspath("jsonSchemas/login/simpleLogin.json"));
+                .statusCode(200)
+                .body(matchesJsonSchemaInClasspath("jsonSchemas/register/userRegistration.json"));
 
         // Extra: Deserialize
         JsonPath userJPath = response.then().extract().body().jsonPath();
-        User newUser = userJPath.getObject("user", User.class);
+        User newUser = userDeserializer(userJPath);
 
-        System.out.println("New user: " + newUser);
+        System.out.println(newUser.toString());
     }
 }

@@ -1,0 +1,62 @@
+{
+  "$id": "getStores",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "status",
+    "stores"
+  ],
+  "properties": {
+    "status": {
+      "title": "Status message",
+      "type": "string",
+      "minLength": 4,
+      "maxLength": 20
+    },
+    "stores": {
+      "type": "array",
+      "additionalProperties": false,
+      "minItems": 1,
+      "additionalItems": false,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "_id",
+          "label",
+          "lat",
+          "lng",
+          "draggable",
+          "user"
+        ],
+        "properties": {
+          "_id": {
+            "type": "string",
+            "pattern": "[0-9a-z]"
+          },
+          "lat": {
+            "type": "number"
+          },
+          "lng": {
+            "type": "number"
+          },
+          "label": {
+            "type": "string",
+            "minLength": 4
+          },
+          "draggable": {
+            "type": "boolean"
+          },
+          "user": {
+            "type": "string",
+            "pattern": "[0-9a-z]"
+          },
+          "__v": {
+            "type": "integer"
+          }
+        }
+      }
+      }
+    }
+}
