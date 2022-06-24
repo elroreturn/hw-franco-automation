@@ -34,6 +34,7 @@ public class editStoreTests extends BaseTest {
         store.setDraggable(true);
 
         RequestSpecification request = given()
+                .baseUri(System.getProperty("SERVER_URL"))
                 .contentType(ContentType.JSON)
                 .header("Authorization", user.getJwt())
                 .body(store)
@@ -41,7 +42,7 @@ public class editStoreTests extends BaseTest {
 
         // Act
         Response response = request.when()
-                .put(System.getProperty("SERVER_URL") + "/api/store")
+                .put("/api/store")
                 .prettyPeek();
 
         // Assert

@@ -28,6 +28,7 @@ public class UserPhotoUploadTests extends BaseTest {
         System.out.println(user.toString());
 
         RequestSpecification request = given()
+                .baseUri(System.getProperty("SERVER_URL"))
                 .contentType("multipart/form-data")
                 .header("Authorization", user.getJwt())
                 .multiPart("file0", getFileFromPath("userAvatar.jpg"))
@@ -35,7 +36,7 @@ public class UserPhotoUploadTests extends BaseTest {
 
         // Act
         Response response = request.when()
-                .post(System.getProperty("SERVER_URL") + "/api/user/upload")
+                .post("/api/user/upload")
                 .prettyPeek();
 
         // Assert

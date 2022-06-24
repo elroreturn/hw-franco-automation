@@ -77,11 +77,12 @@ public class GeneralPreconditions {
         Store store = new Store();
         RequestSpecification request = given()
                 .contentType(ContentType.JSON)
+                .pathParam("userId", userId)
                 .log().all();
 
         // Act
         Response response = request.when()
-                .get(System.getProperty("SERVER_URL") + "/api/stores/" + userId)
+                .get(System.getProperty("SERVER_URL") + "/api/stores/{userId}")
                 .prettyPeek();
 
         // Assert

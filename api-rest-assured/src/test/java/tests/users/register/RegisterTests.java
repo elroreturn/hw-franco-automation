@@ -30,13 +30,14 @@ public class RegisterTests extends BaseTest {
         parameters.put("password", "password");
 
         RequestSpecification request = given()
+                .baseUri(System.getProperty("SERVER_URL"))
                 .contentType(ContentType.JSON)
                 .body(parameters.toString())
                 .log().all();
 
         // Act
         Response response = request.when()
-                .post(System.getProperty("SERVER_URL") + "/api/register")
+                .post("/api/register")
                 .prettyPeek();
 
         // Assert

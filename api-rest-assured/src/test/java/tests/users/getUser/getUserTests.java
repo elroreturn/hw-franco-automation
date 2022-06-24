@@ -28,12 +28,14 @@ public class getUserTests extends BaseTest {
         System.out.println(user.toString());
 
         RequestSpecification request = given()
+                .baseUri(System.getProperty("SERVER_URL"))
+                .pathParam("userId", user.get_id())
                 .contentType(ContentType.JSON)
                 .log().all();
 
         // Act
         Response response = request.when()
-                .get(System.getProperty("SERVER_URL") + "/api/user/" + user.get_id())
+                .get("/api/user/{userId}")
                 .prettyPeek();
 
         // Assert

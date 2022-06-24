@@ -21,12 +21,13 @@ public class GetStoresTests extends BaseTest {
 
         // Arrange
         RequestSpecification request = given()
+                .baseUri(System.getProperty("SERVER_URL"))
                 .contentType(ContentType.JSON)
                 .log().all();
 
         // Act
         Response response = request.when()
-                .get(System.getProperty("SERVER_URL") + "/api/stores")
+                .get("/api/stores")
                 .prettyPeek();
 
         // Assert

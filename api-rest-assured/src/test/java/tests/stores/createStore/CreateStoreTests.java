@@ -35,6 +35,7 @@ public class CreateStoreTests extends BaseTest {
         System.out.println(store.toString());
 
         RequestSpecification request = given()
+                .baseUri(System.getProperty("SERVER_URL"))
                 .contentType(ContentType.JSON)
                 .header("Authorization", user.getJwt())
                 .body(store)
@@ -42,7 +43,7 @@ public class CreateStoreTests extends BaseTest {
 
         // Act
         Response response = request.when()
-                .post(System.getProperty("SERVER_URL") + "/api/store")
+                .post("/api/store")
                 .prettyPeek();
 
         // Assert

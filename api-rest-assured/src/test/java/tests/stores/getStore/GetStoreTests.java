@@ -9,13 +9,10 @@ import models.Store;
 import org.testng.annotations.Test;
 import utils.GeneralPreconditions;
 
-import java.util.List;
-
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.testng.Assert.assertEquals;
 import static utils.deserializer.StoreDeserializer.storeDeserializer;
-import static utils.deserializer.StoreDeserializer.storesDeserializer;
 
 public class GetStoreTests extends BaseTest {
 
@@ -26,12 +23,14 @@ public class GetStoreTests extends BaseTest {
         Store store = new GeneralPreconditions().getStore();
 
         RequestSpecification request = given()
+                .baseUri(System.getProperty("SERVER_URL"))
+                .pathParam("storeId", store.get_id())
                 .contentType(ContentType.JSON)
                 .log().all();
 
         // Act
         Response response = request.when()
-                .get(System.getProperty("SERVER_URL") + "/api/store/" + store.get_id())
+                .get("/api/store/{storeId}")
                 .prettyPeek();
 
         // Assert

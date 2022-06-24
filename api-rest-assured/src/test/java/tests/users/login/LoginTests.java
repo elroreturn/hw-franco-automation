@@ -14,6 +14,7 @@ import utils.fileLoader.users.UsersLoader;
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 import static utils.deserializer.UserDeserializer.userDeserializer;
 import static utils.deserializer.UserDeserializer.userFromJWT;
 
@@ -31,12 +32,13 @@ public class LoginTests extends BaseTest {
 
         RequestSpecification request = given()
                 .contentType(ContentType.JSON)
+                .baseUri(System.getProperty("SERVER_URL"))
                 .body(parameters.toString())
                 .log().all();
 
         // Act
         Response response = request.when()
-                .post(System.getProperty("SERVER_URL") + "/api/login")
+                .post("/api/login")
                 .prettyPeek();
 
         // Assert
@@ -54,7 +56,7 @@ public class LoginTests extends BaseTest {
         assertEquals(newUser.getRole(), "ROLE_USER");
         assertEquals(newUser.getName(), "Franco");
         assertEquals(newUser.getSurname(), "Antognazza");
-        assertEquals(newUser.getImage(), "lganteke.jpeg");
+        assertNotNull(newUser.getImage());
 
         System.out.println(newUser.toString());
     }
@@ -71,13 +73,14 @@ public class LoginTests extends BaseTest {
         parameters.put("getToken", "true");
 
         RequestSpecification request = given()
+                .baseUri(System.getProperty("SERVER_URL"))
                 .contentType(ContentType.JSON)
                 .body(parameters.toString())
                 .log().all();
 
         // Act
         Response response = request.when()
-                .post(System.getProperty("SERVER_URL") + "/api/login")
+                .post("/api/login")
                 .prettyPeek();
 
         // Assert

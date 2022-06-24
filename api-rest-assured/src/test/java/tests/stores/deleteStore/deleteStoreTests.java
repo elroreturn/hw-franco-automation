@@ -27,13 +27,15 @@ public class deleteStoreTests extends BaseTest {
 
 
         RequestSpecification request = given()
+                .baseUri(System.getProperty("SERVER_URL"))
                 .contentType(ContentType.JSON)
+                .pathParam("storeId", store.get_id())
                 .header("Authorization", user.getJwt())
                 .log().all();
 
         // Act
         Response response = request.when()
-                .delete(System.getProperty("SERVER_URL") + "/api/store/" + store.get_id())
+                .delete("/api/store/{storeId}")
                 .prettyPeek();
 
         // Assert
