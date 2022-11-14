@@ -11,7 +11,7 @@ public class FakeUser {
         User fakeUser = new User();
         fakeUser.setName(faker.name().firstName());
         fakeUser.setSurname(faker.name().lastName());
-        fakeUser.setEmail("rantognazza" + faker.number().numberBetween(5, 10) + "@testing.com");
+        fakeUser.setEmail("rantognazza" + faker.number().numberBetween(10000, 9999999) + "@testing.com");
         fakeUser.setUsername(faker.funnyName().name() + faker.number().numberBetween(5, 10));
 
         return fakeUser;

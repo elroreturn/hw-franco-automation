@@ -31,8 +31,7 @@
         "email",
         "role",
         "image",
-        "username",
-        "__v"
+        "username"
       ],
       "properties": {
         "_id":{
@@ -69,11 +68,6 @@
         },
         "image": {
           "type": ["null", "string"]
-        },
-        "__v": {
-          "type": "integer",
-          "minLength": 1,
-          "maxLength": 1
         }
       }
     }

@@ -1,10 +1,6 @@
 package models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-@JsonIgnoreProperties({ "__v" })
 public class User {
-
     private String _id;
     private String name;
     private String surname;

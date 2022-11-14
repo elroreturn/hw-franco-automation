@@ -53,11 +53,8 @@
         "user": {
           "type": "string",
           "pattern": "[0-9a-z]"
-        },
-        "__v": {
-          "type": "integer"
         }
       }
-      }
     }
+  }
 }

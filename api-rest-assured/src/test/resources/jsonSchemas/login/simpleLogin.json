@@ -31,8 +31,7 @@
         "email",
         "role",
         "image",
-        "username",
-        "__v"
+        "username"
       ],
       "properties": {
         "_id":{
@@ -72,11 +71,6 @@
           "minLength": 8,
           "maxLength": 50,
           "pattern": "^.*(.png|.jpg|.jpeg)$"
-        },
-        "__v": {
-          "type": "integer",
-          "minLength": 1,
-          "maxLength": 1
         }
       }
     }

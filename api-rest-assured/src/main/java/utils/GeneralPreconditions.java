@@ -25,7 +25,6 @@ public class GeneralPreconditions {
         JSONObject parameters = new JSONObject();
         parameters.put("email", usersCsv.getEmail());
         parameters.put("password", usersCsv.getPassword());
-        parameters.put("getToken", "true");
 
         RequestSpecification request = given()
                 .contentType(ContentType.JSON)
@@ -33,7 +32,7 @@ public class GeneralPreconditions {
                 .log().all();
 
         Response response = request.when()
-                .post(System.getProperty("SERVER_URL") + "/api/login")
+                .post(System.getProperty("SERVER_URL") + "/api/login/token")
                 .prettyPeek();
 
         response.then()

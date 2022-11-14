@@ -7,6 +7,7 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import models.Store;
 import models.User;
+import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 import utils.GeneralPreconditions;
 import utils.fileLoader.users.UsersCsv;
@@ -29,10 +30,10 @@ public class CreateStoreTests extends BaseTest {
 
         Store store = new Store();
         store.setDraggable(false);
-        store.setLabel("Automation Test");
+        store.setLabel("Automation Test-" + DateTime.now());
         store.setLat(-34.865425);
         store.setLng(-55.024155);
-        System.out.println(store.toString());
+        System.out.println(store);
 
         RequestSpecification request = given()
                 .baseUri(System.getProperty("SERVER_URL"))

@@ -1,8 +1,5 @@
 package models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-@JsonIgnoreProperties({ "__v" })
 public class Store {
 
     private String _id;
@@ -11,7 +8,6 @@ public class Store {
     private String label;
     private boolean draggable;
     private String user;
-    private String jwt;
 
     public Store() {
     }
@@ -103,13 +99,5 @@ public class Store {
 
     public void setUser(String user) {
         this.user = user;
-    }
-
-    public String getJwt() {
-        return jwt;
-    }
-
-    public void setJwt(String jwt) {
-        this.jwt = jwt;
     }
 }

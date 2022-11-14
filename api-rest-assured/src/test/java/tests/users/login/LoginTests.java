@@ -58,10 +58,10 @@ public class LoginTests extends BaseTest {
         assertEquals(newUser.getSurname(), "Antognazza");
         assertNotNull(newUser.getImage());
 
-        System.out.println(newUser.toString());
+        System.out.println(newUser);
     }
 
-    @Test
+    @Test(testName = "Login using token endpoint")
     public void tokenSuccessfulLoginTest() {
 
         // Arrange
@@ -70,7 +70,6 @@ public class LoginTests extends BaseTest {
         JSONObject parameters = new JSONObject();
         parameters.put("email", testUser.getEmail());
         parameters.put("password", testUser.getPassword());
-        parameters.put("getToken", "true");
 
         RequestSpecification request = given()
                 .baseUri(System.getProperty("SERVER_URL"))
@@ -80,7 +79,7 @@ public class LoginTests extends BaseTest {
 
         // Act
         Response response = request.when()
-                .post("/api/login")
+                .post("/api/login/token")
                 .prettyPeek();
 
         // Assert
@@ -90,11 +89,9 @@ public class LoginTests extends BaseTest {
                 .assertThat()
                 .body(matchesJsonSchemaInClasspath("jsonSchemas/login/tokenLogin.json"));
 
-        // TODO: Extra: Deserialize From JWT
         String jwt = response.then().extract().path("token");
         User user = userFromJWT(jwt);
 
-        System.out.println(user.toString());
-
+        System.out.println(user);
     }
 }
